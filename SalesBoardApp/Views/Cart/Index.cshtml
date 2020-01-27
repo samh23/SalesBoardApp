@@ -1,0 +1,63 @@
+﻿@model SalesBoardApp.Models.ShoppingCartViewModel
+@using Newtonsoft.Json
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cart</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Option</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Sub Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    <img style="max-width: 100px;" src="@Html.DisplayFor(modelItem => item.Product.Image)" />
+                </td>
+                <td>
+                    <a asp-controller="cart" asp-action="remove" asp-route-id="@item.Product.ProductId">Remove</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @(item.Product.Price * item.Quantity)
+                </td>
+            </tr>
+        }
+        <tr>
+            <td align="right" colspan="5"><strong>Total Price</strong></td>
+            <td>
+                @Model.TotalPrice
+            </td>
+        </tr>
+    </tbody>
+</table>
+<form asp-controller="Cart" asp-action="Purchase">
+    <p>
+        <input type="hidden" name="Items" value="@JsonConvert.SerializeObject(Model.Items)" />
+        <input type="hidden" name="TotalPrice" value="@Model.TotalPrice" />
+        <input type="submit" value="Purchase" />
+    </p>
+</form>
+<a asp-controller="Products" asp-action="Index">Continue Shopping</a>
+

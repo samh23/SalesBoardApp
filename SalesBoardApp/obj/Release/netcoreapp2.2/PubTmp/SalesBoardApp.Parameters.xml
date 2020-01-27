@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="SalesBoardApp20190923081802" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\sam_h\\Study\\Distributed_Development_HIT339\\sam_hood_sales_board_application\\SalesBoardApp\\obj\\Release\\netcoreapp2\.2\\PubTmp\\Out\\$" />
+  </parameter>
+  <parameter name="SalesBoardApp.Models.SalesBoardAppContext" description="" value="Data Source=tcp:salesboardappdbserver.database.windows.net,1433;Initial Catalog=SalesBoardApp20190923081802_db;User Id=adminuser@salesboardappdbserver;Password=559GBd7klmjX" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\sam_h\\Study\\Distributed_Development_HIT339\\sam_hood_sales_board_application\\SalesBoardApp\\obj\\Release\\netcoreapp2\.2\\PubTmp\\EFSQLScripts\\SalesBoardApp\.Models\.SalesBoardAppContext\.sql$" />
+  </parameter>
+</parameters>

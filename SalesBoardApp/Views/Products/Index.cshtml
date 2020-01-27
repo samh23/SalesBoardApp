@@ -1,0 +1,62 @@
+﻿@model SalesBoardApp.Models.ProductSearchViewModel
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Identity
+@using SalesBoardApp.Areas.Identity.Data
+@inject IAuthorizationService  AuthorizationService
+@inject UserManager<SalesBoardAppUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron text-center pb-2">
+    <h1 class="display-4 mb-5">Product List</h1>
+    <form asp-controller="Products" asp-action="Index" method="get" class="form-inline justify-content-center justify-content-center justify-content-md-end">
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="search" class="sr-only">Search Items</label>
+            <input type="text" asp-for="SearchString" class="form-control" placeholder="Search items..." />
+        </div>
+        <input type="submit" value="Search" class="btn btn-success mb-2" />
+    </form>
+</div>
+
+
+
+<section id="product-list">
+    @foreach (var item in Model.Products)
+    {
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="@item.Image" class="card-img" alt"..." />
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        @if (item.Available == 0)
+                        {
+                            <h5 class="cart-title">@Html.DisplayFor(modelItem => item.Name) (SOLD OUT)</h5>
+                        }
+                        else
+                        {
+                            <h5 class="cart-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                        }
+                        <p class="card-text">$@Html.DisplayFor(modelItem => item.Price)</p>
+                        <p class="card-text d-none d-md-block">@Html.DisplayFor(modelItem => item.Description)</p>
+                        <p class="card-text"><small class="text-muted">Posted by @item.SalesBoardAppUser.FirstName @item.SalesBoardAppUser.LastName on @Html.DisplayFor(modelItem => item.Posted)</small></p>
+                        <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.ProductId">Details</a>
+                        @if (UserManager.GetUserId(User) == item.UserId || item.Available == 0)
+                        {
+                            <a class="btn btn-primary btn-sm disabled" aria-disabled="true" asp-controller="Cart" asp-action="buy" asp-route-id="@item.ProductId">Add to cart</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-primary btn-sm" asp-controller="Cart" asp-action="buy" asp-route-id="@item.ProductId">Add to cart</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+

@@ -1,0 +1,82 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using SalesBoardApp.Areas.Identity.Data
+@using Microsoft.AspNetCore.Authorization
+@inject SignInManager<SalesBoardAppUser> SignInManager
+@inject UserManager<SalesBoardAppUser> UserManager
+@inject IAuthorizationService  AuthorizationService
+@model SalesBoardApp.Models.UserInfoViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="jumbotron text-center">
+    <h1 class="display-4 mb-5">User Information</h1>
+    <a asp-controller="products" asp-action="Create" class="btn btn-outline-primary">Add Item</a>
+    <a asp-controller="products" asp-action="Index" class="btn btn-outline-primary">View All Items</a>
+</div>
+
+<section class="mb-5" id="product-list">
+    <h2 class="mb-4">Your Items</h2>
+    @foreach (var item in Model.Products)
+    {
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="@item.Image" class="card-img" alt"..." />
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        @if (item.Available == 0)
+                        {
+                            <h5 class="cart-title">@Html.DisplayFor(modelItem => item.Name) (SOLD OUT)</h5>
+                        }
+                        else
+                        {
+                            <h5 class="cart-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                        }
+                        <p class="card-text">$@Html.DisplayFor(modelItem => item.Price)</p>
+                        <p class="card-text d-none d-md-block">@Html.DisplayFor(modelItem => item.Description)</p>
+                        <p class="card-text mb-5"><small class="text-muted">Posted on @Html.DisplayFor(modelItem => item.Posted)</small></p>
+                        <a class="btn btn-primary btn-sm" asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId">Details</a>
+                        @if ((await AuthorizationService.AuthorizeAsync(User, Model, "AccessPolicy")).Succeeded)
+                        {
+                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item">Edit</a>
+                        }
+                        @if ((await AuthorizationService.AuthorizeAsync(User, Model, "AccessPolicy")).Succeeded)
+                        {
+                            <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+<section id="customer-purchases"> 
+    <h2 class="mb-4">Your Customers</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Purchase Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var purchase in Model.Purchases)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelPurchase => purchase.Customer.FirstName) @Html.DisplayFor(modelPurchase => purchase.Customer.LastName)
+                        </td>
+                        <td>
+                            $@Html.DisplayFor(modelPurchase => purchase.Amount)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+
+
+

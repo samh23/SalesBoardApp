@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8KkJW+kJUUuQOtFrPOS13QAAAAACAAAAAAAQZgAAAAEAACAAAABCrclf6s2kl306gJPDJ+q6GZ/XHbUc0jNJ06mqd7ke1wAAAAAOgAAAAAIAACAAAADv94CoEHR1DmIu99DWmG+BfAcwms3LfUaJFuRCzMvr4YAAAACdDgR1Yo88MuaHEdQFGsrft2rBOYKz8V2B3C7Q4INDp1UdO7nU0TR17MK5RQ/t9zgKQU9OGkAyVj7rK+UoLZ10yWGu+roBbytndE579hPA/4xrhHhWMGSVJxMt8JztYfbRLBO9VLZljR25R4yGYtYKunK7K3Y7vokOtcQ0o+vIgkAAAADSEeiePtsMNg9Y/18dJp+2/myOPSPjPJCPFpWUfh52fH4yhcRVDT2dHJozmE99+MxHriLFWaz7KfHcGCqsbMFH</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="SalesBoardAppContextConnection">
+      <Value>Data Source=tcp:salesboardappdbserver.database.windows.net,1433%3bInitial Catalog=SalesBoardApp20190923081802_db%3bUser Id=adminuser%40salesboardappdbserver%3bPassword=559GBd7klmjX</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="SalesBoardApp.Models.SalesBoardAppContext">
+      <Value>Data Source=tcp:salesboardappdbserver.database.windows.net,1433%3bInitial Catalog=SalesBoardApp20190923081802_db%3bUser Id=adminuser%40salesboardappdbserver%3bPassword=559GBd7klmjX</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

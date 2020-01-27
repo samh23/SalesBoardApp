@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="C:\Users\sam_h\Study\Distributed_Development_HIT339\sam_hood_sales_board_application\SalesBoardApp\obj\Release\netcoreapp2.2\PubTmp\Out\" />
+  <dbfullsql path="C:\Users\sam_h\Study\Distributed_Development_HIT339\sam_hood_sales_board_application\SalesBoardApp\obj\Release\netcoreapp2.2\PubTmp\EFSQLScripts\SalesBoardApp.Models.SalesBoardAppContext.sql" />
+</sitemanifest>
